@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Literata:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FBF4E8;
+    --paper-shadow: #EDE0CB;
+    --ink: #3E2C24;
+    --ink-soft: #6B564A;
+    --rose: #B9707C;
+    --rose-deep: #8A4A56;
+    --plum: #5B3A4C;
+    --gold: #C6973E;
+    --gold-soft: #E4C888;
+    --max-width: 620px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #E8D9C4 0%, #DCC9AE 100%);
+    font-family: 'Literata', Georgia, serif;
+    color: var(--ink);
+    padding: 48px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* subtle paper grain */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(rgba(62,44,36,0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: 0.6;
+  }
+
+  .letter {
+    position: relative;
+    width: 100%;
+    max-width: var(--max-width);
+    background: var(--paper);
+    border-radius: 3px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,0.6) inset,
+      0 30px 60px -20px rgba(62,44,36,0.35),
+      0 10px 20px -10px rgba(62,44,36,0.2);
+    padding: 64px 48px 56px;
+    animation: rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* wax seal */
+  .seal {
+    position: absolute;
+    top: -26px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 32% 30%, var(--rose) 0%, var(--rose-deep) 65%, #7A404B 100%);
+    box-shadow: 0 6px 14px rgba(62,44,36,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 22px;
+    color: #F6E7DC;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .eyebrow {
+    display: block;
+    font-family: 'Literata', serif;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 6vw, 46px);
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--plum);
+  }
+
+  h1 em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--rose-deep);
+  }
+
+  .sub {
+    font-size: 16px;
+    color: var(--ink-soft);
+    font-style: italic;
+  }
+
+  .divider {
+    width: 60px;
+    height: 2px;
+    margin: 36px auto;
+    background: linear-gradient(90deg, transparent, var(--gold-soft), transparent);
+    border: none;
+  }
+
+  .apology p {
+    font-size: 18px;
+    line-height: 1.85;
+    margin: 0 0 20px;
+    color: var(--ink);
+  }
+
+  .apology p:last-child { margin-bottom: 0; }
+
+  .highlight {
+    color: var(--rose-deep);
+    font-style: italic;
+  }
+
+  .placeholder {
+    background: rgba(198,151,62,0.16);
+    border-bottom: 1.5px dashed var(--gold);
+    padding: 0 3px;
+    border-radius: 2px;
+  }
+
+  /* memories section */
+  .memories {
+    margin-top: 48px;
+  }
+
+  .memories h2 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: 22px;
+    color: var(--plum);
+    text-align: center;
+    margin: 0 0 28px;
+  }
+
+
+
+
+
+/* =========================
+   MEMORIES / POLAROID GALLERY
+   ========================= */
+
+.memory-row {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.polaroid {
+  background: #fff;
+  padding: 10px 10px 34px;
+  width: 155px;
+  box-shadow: 0 8px 18px rgba(62,44,36,0.22);
+  font-family: 'Literata', serif;
+  font-size: 12px;
+  color: var(--ink-soft);
+  text-align: center;
+  height: auto;
+}
+
+/* First image */
+.polaroid:nth-child(1) {
+  transform: rotate(-6deg);
+}
+
+/* Second image */
+.polaroid:nth-child(2) {
+  transform: rotate(4deg);
+  margin-top: 14px;
+}
+
+/* THIRD IMAGE — LANDSCAPE */
+.polaroid:nth-child(3) {
+  transform: rotate(-2deg);
+  width: 220px;
+}
+
+/* Image section */
+.polaroid .frame {
+  width: 100%;
+  height: auto;
+  background: #f3eadc;
+  margin-bottom: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Actual image */
+.polaroid .frame img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+/* Caption */
+.polaroid figcaption {
+  font-style: italic;
+  margin-top: 4px;
+}
+
+
+
+
+  /* closing */
+  .closing {
+    margin-top: 52px;
+    text-align: center;
+  }
+
+  .closing p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--ink);
+    margin: 0 0 28px;
+  }
+
+  .signoff {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 20px;
+    color: var(--rose-deep);
+    margin-bottom: 30px;
+  }
+
+  .cta {
+    display: inline-block;
+    font-family: 'Literata', serif;
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #F6E7DC;
+    background: linear-gradient(180deg, var(--rose) 0%, var(--rose-deep) 100%);
+    padding: 14px 32px;
+    border-radius: 999px;
+    text-decoration: none;
+    box-shadow: 0 10px 20px -8px rgba(138,74,86,0.55);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px -8px rgba(138,74,86,0.6);
+  }
+
+  .cta:focus-visible {
+    outline: 3px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  footer {
+    margin-top: 26px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--ink-soft);
+    opacity: 0.8;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .letter { animation: none; }
+    .cta { transition: none; }
+  }
+
+  @media (max-width: 480px) {
+    .letter { padding: 56px 24px 40px; }
+    .polaroid { width: 110px; }
+  }
+</style>
+</head>
+<body>
+
+  <main class="letter">
+    <div class="seal">&#10084;</div>
+
+    <header>
+      <span class="eyebrow">A note for</span>
+      <h1>I'm sorry, <em>Mayuu</em></h1>
+      <p class="sub">what was meant in fun landed the wrong way &mdash; and I owe you this</p>
+    </header>
+
+    <hr class="divider">
+
+    <section class="apology">
+      <p>I keep replaying it, and I know now the joke didn't land the way I meant it to. That's on me. I never wanted to make light of your feelings &mdash; I just wanted us to laugh together, the way we always do &mdash; and instead I hurt you. I'm truly sorry for that.</p>
+      <p>You matter more to me than being right or getting the last laugh ever could. <span class="highlight">I never meant to hurt you</span>, and I don't want a silly misunderstanding to sit between us. Our relationship means everything to me, and I want the chance to make this right.</p>
+      <p>Whenever you're ready, I'm here &mdash; no pressure, just love.</p>
+    </section>
+
+<div class="memory-row">
+
+  <figure class="polaroid">
+    <div class="frame">
+      <img src="best.JPG" alt="Mau laughing, hand over her mouth, showing off henna">
+    </div>
+    <figcaption>
+      <span class="placeholder">[caption]</span>
+    </figcaption>
+  </figure>
+
+  <figure class="polaroid">
+    <div class="frame">
+      <img src="IMG_5172.png" alt="Mau smiling in her blazer">
+    </div>
+    <figcaption>
+      <span class="placeholder">[caption]</span>
+    </figcaption>
+  </figure>
+
+  <figure class="polaroid">
+    <div class="frame">
+      <img src="IMG_3418.JPG" alt="A close, candid moment together">
+    </div>
+    <figcaption>
+      <span class="placeholder">[caption]</span>
+    </figcaption>
+  </figure>
+
+</div>
+
+    <section class="closing">
+      <p>None of this cancels out the good stuff &mdash; the inside jokes, the ridiculous laughs, the way you make ordinary days better. I'd love to add to that list, starting with a real conversation whenever you're ready.</p>
+      <p class="signoff">Still yours, still sorry, still smiling at you &mdash; <span class="placeholder">Your SpiderMan</span></p>
+      <a class="cta" href="sms:&#43;10000000000">Let's talk &#8594;</a>
+    </section>
+  </main>
+
+  <footer>made with care, for you</footer>
+
+</body>
+</html>
